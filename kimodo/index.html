@@ -1,0 +1,2237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Kimodo Motion Generation</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Kimodo Motion Generation" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Kimodo Motion Generation&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: var(--border-radius-lg, 12.5px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: 16px !important;
+  height: 16px !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;kimodo-explainer&quot;&gt;
+  &lt;style&gt;
+    #kimodo-explainer {
+      color: var(--foreground);
+      max-width: 100%;
+    }
+
+    #kimodo-explainer * {
+      box-sizing: border-box;
+    }
+
+    #kimodo-explainer .kimodo-hero {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    #kimodo-explainer .kimodo-kicker {
+      color: var(--viz-series-1);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #kimodo-explainer .kimodo-lead {
+      max-width: 78ch;
+      color: var(--muted-foreground);
+    }
+
+    #kimodo-explainer .kimodo-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    #kimodo-explainer .kimodo-panel {
+      display: grid;
+      gap: 22px;
+    }
+
+    #kimodo-explainer .kimodo-panel[hidden] {
+      display: none;
+    }
+
+    #kimodo-explainer .kimodo-section {
+      display: grid;
+      gap: 12px;
+    }
+
+    #kimodo-explainer .kimodo-section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    #kimodo-explainer .kimodo-muted {
+      color: var(--muted-foreground);
+    }
+
+    #kimodo-explainer .kimodo-pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    #kimodo-explainer .kimodo-pipeline-grid .btn {
+      min-height: 86px;
+      white-space: normal;
+      text-align: left;
+    }
+
+    #kimodo-explainer .kimodo-stage-index {
+      display: block;
+      color: var(--muted-foreground);
+      margin-bottom: 4px;
+    }
+
+    #kimodo-explainer .kimodo-stage-label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    #kimodo-explainer .kimodo-stage-example {
+      display: block;
+      color: var(--muted-foreground);
+    }
+
+    #kimodo-explainer .kimodo-compare {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    #kimodo-explainer .kimodo-compare-side {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-compare-divider {
+      align-self: center;
+      color: var(--viz-series-1);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    #kimodo-explainer .kimodo-list {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    #kimodo-explainer .kimodo-list li + li {
+      margin-top: 5px;
+    }
+
+    #kimodo-explainer .kimodo-timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      position: relative;
+    }
+
+    #kimodo-explainer .kimodo-timeline::before {
+      content: &quot;&quot;;
+      position: absolute;
+      top: 18px;
+      left: 7%;
+      right: 7%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    #kimodo-explainer .kimodo-timepoint {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 5px;
+      align-content: start;
+    }
+
+    #kimodo-explainer .kimodo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--viz-series-1);
+      box-shadow: 0 0 0 4px var(--background);
+      margin: 12px 0 6px;
+    }
+
+    #kimodo-explainer .kimodo-year {
+      font-weight: 500;
+    }
+
+    #kimodo-explainer .kimodo-architecture {
+      display: grid;
+      grid-template-columns: 1fr auto 1.25fr auto 1.15fr auto 1.15fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #kimodo-explainer .kimodo-node {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+      min-width: 0;
+    }
+
+    #kimodo-explainer .kimodo-node[data-tone=&quot;text&quot;] {
+      background: color-mix(in srgb, var(--viz-series-1) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-node[data-tone=&quot;constraint&quot;] {
+      background: color-mix(in srgb, var(--viz-series-2) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-node[data-tone=&quot;root&quot;] {
+      background: color-mix(in srgb, var(--viz-series-3) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-node[data-tone=&quot;body&quot;] {
+      background: color-mix(in srgb, var(--viz-series-4) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-node-title {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    #kimodo-explainer .kimodo-arrow {
+      color: var(--muted-foreground);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    #kimodo-explainer .kimodo-input-stack {
+      display: grid;
+      gap: 7px;
+    }
+
+    #kimodo-explainer .kimodo-loop-note {
+      border-left: 3px solid var(--viz-series-1);
+      padding-left: 12px;
+      color: var(--muted-foreground);
+    }
+
+    #kimodo-explainer .kimodo-rep-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    #kimodo-explainer .kimodo-rep-grid .btn {
+      min-height: 74px;
+      white-space: normal;
+    }
+
+    #kimodo-explainer .kimodo-training {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    #kimodo-explainer .kimodo-training-phase {
+      padding: 14px;
+      min-height: 94px;
+    }
+
+    #kimodo-explainer .kimodo-training-phase:first-child {
+      background: color-mix(in srgb, var(--viz-series-1) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-training-phase:last-child {
+      background: color-mix(in srgb, var(--viz-series-2) 12%, transparent);
+    }
+
+    #kimodo-explainer .kimodo-metric-chart {
+      display: grid;
+      gap: 15px;
+    }
+
+    #kimodo-explainer .kimodo-metric-group {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.7fr) 2fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    #kimodo-explainer .kimodo-bars {
+      display: grid;
+      gap: 7px;
+    }
+
+    #kimodo-explainer .kimodo-bar-row {
+      display: grid;
+      grid-template-columns: 86px 1fr 58px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #kimodo-explainer .kimodo-bar-track {
+      height: 13px;
+      background: color-mix(in srgb, var(--muted) 70%, transparent);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    #kimodo-explainer .kimodo-bar {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--viz-series-1);
+    }
+
+    #kimodo-explainer .kimodo-bar[data-series=&quot;baseline&quot;] {
+      background: var(--viz-series-5);
+    }
+
+    #kimodo-explainer .kimodo-scale-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    #kimodo-explainer .kimodo-scale-item {
+      padding-top: 10px;
+      border-top: 3px solid var(--viz-series-1);
+    }
+
+    #kimodo-explainer .kimodo-scale-item:nth-child(2) {
+      border-color: var(--viz-series-2);
+    }
+
+    #kimodo-explainer .kimodo-scale-item:nth-child(3) {
+      border-color: var(--viz-series-3);
+    }
+
+    #kimodo-explainer .kimodo-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    #kimodo-explainer .kimodo-status::before {
+      content: &quot;&quot;;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--muted-foreground);
+    }
+
+    #kimodo-explainer .kimodo-status[data-status=&quot;open&quot;]::before {
+      background: var(--green);
+    }
+
+    #kimodo-explainer .kimodo-status[data-status=&quot;partial&quot;]::before {
+      background: var(--yellow);
+    }
+
+    #kimodo-explainer .kimodo-status[data-status=&quot;external&quot;]::before {
+      background: var(--blue);
+    }
+
+    #kimodo-explainer .kimodo-status[data-status=&quot;missing&quot;]::before {
+      background: var(--red);
+    }
+
+    #kimodo-explainer .kimodo-robot-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      align-items: center;
+    }
+
+    #kimodo-explainer .kimodo-robot-stage {
+      min-height: 104px;
+    }
+
+    #kimodo-explainer .kimodo-boundary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    #kimodo-explainer .kimodo-good {
+      border-top: 3px solid var(--green);
+      padding-top: 10px;
+    }
+
+    #kimodo-explainer .kimodo-not {
+      border-top: 3px solid var(--red);
+      padding-top: 10px;
+    }
+
+    #kimodo-explainer .kimodo-source-row {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      color: var(--muted-foreground);
+    }
+
+    @media (max-width: 760px) {
+      #kimodo-explainer .kimodo-pipeline-grid,
+      #kimodo-explainer .kimodo-rep-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #kimodo-explainer .kimodo-architecture {
+        grid-template-columns: 1fr;
+      }
+
+      #kimodo-explainer .kimodo-arrow {
+        transform: rotate(90deg);
+      }
+
+      #kimodo-explainer .kimodo-timeline {
+        grid-template-columns: 1fr;
+      }
+
+      #kimodo-explainer .kimodo-timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 5px;
+        right: auto;
+        width: 2px;
+        height: auto;
+      }
+
+      #kimodo-explainer .kimodo-timepoint {
+        grid-template-columns: 18px 1fr;
+        column-gap: 8px;
+      }
+
+      #kimodo-explainer .kimodo-dot {
+        grid-row: 1 / span 3;
+        margin-top: 4px;
+      }
+
+      #kimodo-explainer .kimodo-compare,
+      #kimodo-explainer .kimodo-boundary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #kimodo-explainer .kimodo-compare-divider {
+        text-align: center;
+      }
+
+      #kimodo-explainer .kimodo-scale-grid,
+      #kimodo-explainer .kimodo-robot-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 430px) {
+      #kimodo-explainer .kimodo-pipeline-grid,
+      #kimodo-explainer .kimodo-rep-grid,
+      #kimodo-explainer .kimodo-training {
+        grid-template-columns: 1fr;
+      }
+
+      #kimodo-explainer .kimodo-metric-group,
+      #kimodo-explainer .kimodo-bar-row {
+        grid-template-columns: 1fr;
+      }
+
+      #kimodo-explainer .kimodo-bar-track {
+        min-height: 13px;
+      }
+    }
+  &lt;/style&gt;
+
+  &lt;header class=&quot;kimodo-hero&quot;&gt;
+    &lt;div class=&quot;kimodo-kicker text-small&quot;&gt;Human motion → humanoid reference motion&lt;/div&gt;
+    &lt;h1&gt;Kimodo：从动作数据到可控人形动作生成&lt;/h1&gt;
+    &lt;div class=&quot;kimodo-lead&quot;&gt;
+      先理解 human/humanoid motion generation 的完整技术链，再定位 Kimodo：它是一个大规模、离线、运动学动作生成器，连接“动作语义与约束”到“可供动画或机器人控制器跟踪的参考轨迹”。
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;viz-grid&quot; aria-label=&quot;Kimodo key facts&quot;&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;训练动作数据&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot;&gt;700 h&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;光学 mocap · 170 subjects&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;完整模型&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot;&gt;282 M&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;root/body 两个 Transformer&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;单 prompt 时长&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot;&gt;≤ 10 s&lt;/div&gt;
+      &lt;div class=&quot;text-small text-muted&quot;&gt;30 fps · 默认 100-step DDIM&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;nav class=&quot;kimodo-nav&quot; aria-label=&quot;Explainer sections&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; data-kimodo-tab=&quot;lineage&quot; aria-pressed=&quot;true&quot;&gt;1. 领域主线&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-kimodo-tab=&quot;method&quot; aria-pressed=&quot;false&quot;&gt;2. Kimodo 方法&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-kimodo-tab=&quot;results&quot; aria-pressed=&quot;false&quot;&gt;3. 论文结论&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-kimodo-tab=&quot;code&quot; aria-pressed=&quot;false&quot;&gt;4. 代码开放度&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-kimodo-tab=&quot;boundary&quot; aria-pressed=&quot;false&quot;&gt;5. 机器人边界&lt;/button&gt;
+  &lt;/nav&gt;
+
+  &lt;main&gt;
+    &lt;section class=&quot;kimodo-panel&quot; data-kimodo-panel=&quot;lineage&quot;&gt;
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;div class=&quot;kimodo-section-title&quot;&gt;
+          &lt;h2&gt;一条完整的 motion generation 技术链&lt;/h2&gt;
+          &lt;span class=&quot;text-small text-muted&quot;&gt;点击任一环节查看它解决的问题&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-pipeline-grid&quot; role=&quot;group&quot; aria-label=&quot;Motion generation pipeline&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-pipeline-step=&quot;data&quot; aria-pressed=&quot;true&quot;&gt;
+            &lt;span class=&quot;kimodo-stage-index text-small&quot;&gt;01&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-label&quot;&gt;动作数据&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-example text-small&quot;&gt;mocap · video · teleop&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-pipeline-step=&quot;representation&quot; aria-pressed=&quot;false&quot;&gt;
+            &lt;span class=&quot;kimodo-stage-index text-small&quot;&gt;02&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-label&quot;&gt;动作表示&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-example text-small&quot;&gt;skeleton · rotation · contact&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-pipeline-step=&quot;generation&quot; aria-pressed=&quot;false&quot;&gt;
+            &lt;span class=&quot;kimodo-stage-index text-small&quot;&gt;03&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-label&quot;&gt;生成先验&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-example text-small&quot;&gt;VAE · AR · Transformer · diffusion&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-pipeline-step=&quot;control&quot; aria-pressed=&quot;false&quot;&gt;
+            &lt;span class=&quot;kimodo-stage-index text-small&quot;&gt;04&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-label&quot;&gt;可控接口&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-example text-small&quot;&gt;text · keyframe · path · EE&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-pipeline-step=&quot;execution&quot; aria-pressed=&quot;false&quot;&gt;
+            &lt;span class=&quot;kimodo-stage-index text-small&quot;&gt;05&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-label&quot;&gt;物理执行&lt;/span&gt;
+            &lt;span class=&quot;kimodo-stage-example text-small&quot;&gt;retarget · tracking · control&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;card&quot; aria-live=&quot;polite&quot;&gt;
+          &lt;div id=&quot;kimodo-pipeline-title&quot; class=&quot;kimodo-node-title&quot;&gt;动作数据：模型能力的上限&lt;/div&gt;
+          &lt;div id=&quot;kimodo-pipeline-detail&quot; class=&quot;kimodo-muted&quot;&gt;
+            数据决定动作是否自然、是否覆盖目标行为、是否包含可靠接触。光学 mocap 质量高但昂贵；视频数据规模大但 3D 重建噪声高；teleoperation 直接面向机器人，却慢且容易产生不自然动作。
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;Human motion 与 humanoid motion 的关键区别&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-compare&quot;&gt;
+          &lt;div class=&quot;kimodo-compare-side&quot;&gt;
+            &lt;h3&gt;Human motion generation&lt;/h3&gt;
+            &lt;ul class=&quot;kimodo-list&quot;&gt;
+              &lt;li&gt;重点：自然度、语义一致性、风格与多样性&lt;/li&gt;
+              &lt;li&gt;常用表示：SMPL-X/SOMA/骨架关节与旋转&lt;/li&gt;
+              &lt;li&gt;允许：轻微穿地、足滑、动力学不严格&lt;/li&gt;
+              &lt;li&gt;典型输出：动画或运动学参考轨迹&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-compare-divider&quot;&gt;需要桥接 →&lt;/div&gt;
+          &lt;div class=&quot;kimodo-compare-side&quot;&gt;
+            &lt;h3&gt;Humanoid motion generation&lt;/h3&gt;
+            &lt;ul class=&quot;kimodo-list&quot;&gt;
+              &lt;li&gt;额外要求：关节限位、接触、平衡与扭矩可实现性&lt;/li&gt;
+              &lt;li&gt;机器人形态与人体骨架比例、自由度不同&lt;/li&gt;
+              &lt;li&gt;动作必须被 tracking controller 稳定执行&lt;/li&gt;
+              &lt;li&gt;典型输出：可跟踪 reference + physical policy&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;kimodo-loop-note&quot;&gt;
+          Kimodo 主要解决左侧以及中间的“运动学桥接”：它能直接在 G1 骨架上生成 reference motion，但不替代右侧的物理控制器。
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;方法演进：为什么走到 controllable diffusion&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-timeline&quot; aria-label=&quot;Human motion generation method timeline&quot;&gt;
+          &lt;div class=&quot;kimodo-timepoint&quot;&gt;
+            &lt;div class=&quot;kimodo-dot&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;kimodo-year&quot;&gt;早期&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;Motion graph / optimization&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;可控但依赖规则与数据库拼接&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-timepoint&quot;&gt;
+            &lt;div class=&quot;kimodo-dot&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;kimodo-year&quot;&gt;2015–2020&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;RNN / VAE / GAN&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;学习动作分布，长程质量仍有限&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-timepoint&quot;&gt;
+            &lt;div class=&quot;kimodo-dot&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;kimodo-year&quot;&gt;2022+&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;Text-to-motion&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;自然语言成为主要控制接口&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-timepoint&quot;&gt;
+            &lt;div class=&quot;kimodo-dot&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;kimodo-year&quot;&gt;2023+&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;Controllable diffusion&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;在 pose space 中注入稀疏/稠密约束&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-timepoint&quot;&gt;
+            &lt;div class=&quot;kimodo-dot&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;kimodo-year&quot;&gt;Kimodo&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;Scale + unified controls&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;700h mocap、两阶段去噪、多骨架发布&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;kimodo-panel&quot; data-kimodo-panel=&quot;method&quot; hidden&gt;
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;div class=&quot;kimodo-section-title&quot;&gt;
+          &lt;h2&gt;Kimodo 一次去噪步骤&lt;/h2&gt;
+          &lt;span class=&quot;text-small text-muted&quot;&gt;显式 pose-space diffusion&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-architecture&quot; role=&quot;img&quot; aria-label=&quot;Kimodo architecture: text, constraints and noisy motion feed a root denoiser, then a body denoiser&quot;&gt;
+          &lt;div class=&quot;kimodo-input-stack&quot;&gt;
+            &lt;div class=&quot;kimodo-node&quot; data-tone=&quot;text&quot;&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;Text&lt;/div&gt;
+              &lt;div class=&quot;text-small&quot;&gt;LLM2Vec · 4096-d&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;kimodo-node&quot; data-tone=&quot;constraint&quot;&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;Constraints&lt;/div&gt;
+              &lt;div class=&quot;text-small&quot;&gt;target motion + binary mask&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;kimodo-node&quot;&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;Noisy motion xₜ&lt;/div&gt;
+              &lt;div class=&quot;text-small&quot;&gt;每帧一个 pose token&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;kimodo-node&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;约束覆写与 mask 拼接&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;x̃ₜ = m·target + (1−m)·xₜ&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;输入 token = [x̃ₜ ; m]&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;kimodo-node&quot; data-tone=&quot;root&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;Root denoiser&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;预测全局 smooth root + heading&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;看到完整 noisy body 与全部约束&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-arrow&quot; aria-hidden=&quot;true&quot;&gt;→&lt;/div&gt;
+          &lt;div class=&quot;kimodo-node&quot; data-tone=&quot;body&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;Body denoiser&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot;&gt;global root → local velocity&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;预测 joint/body/contact features&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-loop-note&quot;&gt;
+          两阶段在每个 diffusion step 中交错执行；默认以 DDIM 重复约 100 次，最后得到 clean motion，再可选执行 foot locking、轨迹优化和 IK。
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;div class=&quot;kimodo-section-title&quot;&gt;
+          &lt;h2&gt;运动表示为什么重要&lt;/h2&gt;
+          &lt;span class=&quot;text-small text-muted&quot;&gt;点击 feature 查看设计目的&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-rep-grid&quot; role=&quot;group&quot; aria-label=&quot;Kimodo motion representation features&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;root&quot; aria-pressed=&quot;true&quot;&gt;Smooth root&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;3D position&lt;/span&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;heading&quot; aria-pressed=&quot;false&quot;&gt;Heading&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;cos ψ, sin ψ&lt;/span&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;position&quot; aria-pressed=&quot;false&quot;&gt;Joint position&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;3J&lt;/span&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;rotation&quot; aria-pressed=&quot;false&quot;&gt;Global rotation&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;6J&lt;/span&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;velocity&quot; aria-pressed=&quot;false&quot;&gt;Velocity&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;3J&lt;/span&gt;&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-rep=&quot;contact&quot; aria-pressed=&quot;false&quot;&gt;Foot contact&lt;br&gt;&lt;span class=&quot;text-small&quot;&gt;4 flags&lt;/span&gt;&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;card&quot; aria-live=&quot;polite&quot;&gt;
+          &lt;div id=&quot;kimodo-rep-title&quot; class=&quot;kimodo-node-title&quot;&gt;Smooth root：稳定的路径参考&lt;/div&gt;
+          &lt;div id=&quot;kimodo-rep-detail&quot; class=&quot;kimodo-muted&quot;&gt;
+            对 pelvis 的水平轨迹做强平滑、保留高度。用户画出的直线或曲线约束作用于 smooth root，而 pelvis 可围绕它自然摆动，减少“为了贴线而偷偷走路”的异常动作。
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;训练配方&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-training&quot; aria-label=&quot;Two-phase Kimodo training curriculum&quot;&gt;
+          &lt;div class=&quot;kimodo-training-phase&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;Phase 1 · 500k steps&lt;/div&gt;
+            &lt;div&gt;纯 text-to-motion&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;学习通用动作分布与文本语义&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-training-phase&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;Phase 2 · 500k steps&lt;/div&gt;
+            &lt;div&gt;text + 随机运动学约束&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;关键帧从 1 逐渐增加到 20；25% 混合两种约束&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;viz-row text-small text-muted&quot;&gt;
+          &lt;span&gt;16 × A100 80GB&lt;/span&gt;
+          &lt;span&gt;batch 2048&lt;/span&gt;
+          &lt;span&gt;30 fps&lt;/span&gt;
+          &lt;span&gt;1000-step DDPM training&lt;/span&gt;
+          &lt;span&gt;EMA 0.995&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;kimodo-panel&quot; data-kimodo-panel=&quot;results&quot; hidden&gt;
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;div class=&quot;kimodo-section-title&quot;&gt;
+          &lt;h2&gt;核心消融：两阶段不是装饰&lt;/h2&gt;
+          &lt;span class=&quot;text-small text-muted&quot;&gt;论文 Table 1 · lower is better&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-metric-chart&quot; role=&quot;img&quot; aria-label=&quot;Comparison of full Kimodo and one-stage architecture on foot skating and constraint errors&quot;&gt;
+          &lt;div class=&quot;kimodo-metric-group&quot;&gt;
+            &lt;div&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;Foot skate&lt;/div&gt;
+              &lt;div class=&quot;text-small text-muted&quot;&gt;cm/s&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;kimodo-bars&quot;&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;Full&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; style=&quot;width: 51%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;3.87&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;One-stage&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; data-series=&quot;baseline&quot; style=&quot;width: 100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;7.59&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;kimodo-metric-group&quot;&gt;
+            &lt;div&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;Full-body error&lt;/div&gt;
+              &lt;div class=&quot;text-small text-muted&quot;&gt;cm&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;kimodo-bars&quot;&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;Full&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; style=&quot;width: 32%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;2.67&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;One-stage&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; data-series=&quot;baseline&quot; style=&quot;width: 100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;8.37&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;kimodo-metric-group&quot;&gt;
+            &lt;div&gt;
+              &lt;div class=&quot;kimodo-node-title&quot;&gt;End-effector error&lt;/div&gt;
+              &lt;div class=&quot;text-small text-muted&quot;&gt;cm&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;kimodo-bars&quot;&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;Full&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; style=&quot;width: 30%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;3.09&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;kimodo-bar-row&quot;&gt;
+                &lt;span class=&quot;text-small&quot;&gt;One-stage&lt;/span&gt;
+                &lt;div class=&quot;kimodo-bar-track&quot;&gt;&lt;div class=&quot;kimodo-bar&quot; data-series=&quot;baseline&quot; style=&quot;width: 100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;span class=&quot;text-end&quot;&gt;10.19&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;kimodo-loop-note&quot;&gt;
+          单阶段模型文本指标接近，但足滑约翻倍、约束误差扩大约 3 倍：先确定 root，再生成 body，显著降低了“身体与全局移动互相打架”的难度。
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;Scaling 三条轴各自解决什么&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-scale-grid&quot;&gt;
+          &lt;div class=&quot;kimodo-scale-item&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;更多数据&lt;/div&gt;
+            &lt;div class=&quot;kimodo-muted&quot;&gt;最明显改善约束精度、足滑和细粒度动作变化。&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;10% → 50% → full dataset&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-scale-item&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;更大模型&lt;/div&gt;
+            &lt;div class=&quot;kimodo-muted&quot;&gt;改善文本匹配、FID，同时也改善约束与动作质量。&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;56M → 148M → 282M&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-scale-item&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;更大 batch&lt;/div&gt;
+            &lt;div class=&quot;kimodo-muted&quot;&gt;更稳定的梯度估计，整体指标继续提升。&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;4 → 8 → 16 GPUs&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;实验解读时要注意&lt;/h2&gt;
+        &lt;div class=&quot;table-responsive&quot;&gt;
+          &lt;table class=&quot;table table-sm&quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;对象&lt;/th&gt;
+                &lt;th&gt;论文实验&lt;/th&gt;
+                &lt;th&gt;当前公开 benchmark&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;td&gt;数据&lt;/td&gt;
+                &lt;td&gt;私有 Rigplay test set&lt;/td&gt;
+                &lt;td&gt;公开 BONES-SEED + test metadata&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;骨架 / fps&lt;/td&gt;
+                &lt;td&gt;native 27-joint · 20 fps ablations&lt;/td&gt;
+                &lt;td&gt;SOMA 77-joint · 30 fps&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;可比较性&lt;/td&gt;
+                &lt;td&gt;用于论文内部设计验证&lt;/td&gt;
+                &lt;td&gt;适合外部方法在统一 SEED split 上比较&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;缺口&lt;/td&gt;
+                &lt;td&gt;完整 rotation constraint metric&lt;/td&gt;
+                &lt;td&gt;目前未实现 end-effector rotation error&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;kimodo-panel&quot; data-kimodo-panel=&quot;code&quot; hidden&gt;
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;div class=&quot;kimodo-section-title&quot;&gt;
+          &lt;h2&gt;论文模块与仓库实现映射&lt;/h2&gt;
+          &lt;span class=&quot;text-small text-muted&quot;&gt;当前仓库 commit 1aece8c&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;table-responsive&quot;&gt;
+          &lt;table class=&quot;table table-sm&quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;模块&lt;/th&gt;
+                &lt;th&gt;开放状态&lt;/th&gt;
+                &lt;th&gt;对应代码 / 说明&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Motion representation&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;motion_rep/reps/kimodo_motionrep.py&lt;/code&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Two-stage Transformer&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;model/twostage_denoiser.py&lt;/code&gt; + &lt;code&gt;backbone.py&lt;/code&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;DDIM inference / CFG&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;model/diffusion.py&lt;/code&gt; + &lt;code&gt;cfg.py&lt;/code&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Root / full-body / EE constraints&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;constraints.py&lt;/code&gt;，支持位置、旋转、路径与混合约束&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Foot-contact input constraint&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;partial&quot;&gt;部分&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;模型 feature 中存在；Python API 与 Demo 尚未提供输入接口&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Multi-prompt / postprocess&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;code&gt;kimodo_model.py&lt;/code&gt; + &lt;code&gt;MotionCorrection/&lt;/code&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;CLI / Demo / export&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;SOMA、G1、SMPL-X；NPZ、BVH、MuJoCo CSV、AMASS&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Final checkpoints&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;external&quot;&gt;外部公开&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;Hugging Face 自动下载；权重许可证与 Apache-2.0 源码分离&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Public benchmark&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;open&quot;&gt;大部分完整&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;构造、生成、TMR embedding、评测与汇总均提供&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Training pipeline&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;missing&quot;&gt;缺失&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;无 trainer、loss orchestration、optimizer、EMA、curriculum 与约束采样&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;700h Rigplay data&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;missing&quot;&gt;未开放&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;完整数据 proprietary；公开 BONES-SEED 约 288h&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td&gt;Paper ablation reproduction&lt;/td&gt;
+                &lt;td&gt;&lt;span class=&quot;kimodo-status&quot; data-status=&quot;missing&quot;&gt;缺失&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;无消融 checkpoint、训练配置和精确 Rigplay test suite&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;一句话判断开放程度&lt;/h2&gt;
+        &lt;div class=&quot;viz-grid&quot;&gt;
+          &lt;div class=&quot;card viz-stat&quot;&gt;
+            &lt;div class=&quot;text-muted&quot;&gt;直接生成 / 编辑动作&lt;/div&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;可以&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;推理、约束、Demo、导出链路完整&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card viz-stat&quot;&gt;
+            &lt;div class=&quot;text-muted&quot;&gt;公开 benchmark 对比&lt;/div&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;可以&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;需外部下载 SEED、test suite 和 TMR&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card viz-stat&quot;&gt;
+            &lt;div class=&quot;text-muted&quot;&gt;从零复训论文模型&lt;/div&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;不可以&lt;/div&gt;
+            &lt;div class=&quot;text-small text-muted&quot;&gt;训练代码、完整数据和消融资产缺失&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;kimodo-panel&quot; data-kimodo-panel=&quot;boundary&quot; hidden&gt;
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;从一句文本到真实 humanoid，中间还有什么&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-robot-flow&quot; role=&quot;img&quot; aria-label=&quot;Pipeline from text constraints through Kimodo to a tracking controller and humanoid robot&quot;&gt;
+          &lt;div class=&quot;kimodo-node kimodo-robot-stage&quot; data-tone=&quot;text&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;1. Intent&lt;/div&gt;
+            &lt;div&gt;文本 + 关键帧 + 路径 + 末端目标&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-node kimodo-robot-stage&quot; data-tone=&quot;root&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;2. Kimodo&lt;/div&gt;
+            &lt;div&gt;生成运动学 reference motion&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-node kimodo-robot-stage&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;3. Retarget / projection&lt;/div&gt;
+            &lt;div&gt;适配机器人 DOF、比例和 joint limits&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-node kimodo-robot-stage&quot; data-tone=&quot;constraint&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;4. Tracking policy&lt;/div&gt;
+            &lt;div&gt;RL / MPC / whole-body controller&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-node kimodo-robot-stage&quot; data-tone=&quot;body&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;5. Physics / robot&lt;/div&gt;
+            &lt;div&gt;接触、平衡、扭矩、扰动与实时反馈&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;kimodo-loop-note&quot;&gt;
+          论文中的真机结果走的是“Kimodo 生成参考动作 → ProtoMotions tracking policy → 仿真/真机”，不是把 diffusion 的关节结果直接发送给电机。
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;适合与不适合&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-boundary-grid&quot;&gt;
+          &lt;div class=&quot;kimodo-good&quot;&gt;
+            &lt;h3&gt;适合&lt;/h3&gt;
+            &lt;ul class=&quot;kimodo-list&quot;&gt;
+              &lt;li&gt;快速制作人类或 G1 的参考动作&lt;/li&gt;
+              &lt;li&gt;通过路径、关键帧和末端目标做 motion authoring&lt;/li&gt;
+              &lt;li&gt;批量生成 tracking-policy 训练数据&lt;/li&gt;
+              &lt;li&gt;in-betweening、风格动作、动作数据扩充&lt;/li&gt;
+              &lt;li&gt;在统一 SEED benchmark 上比较生成模型&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-not&quot;&gt;
+            &lt;h3&gt;不适合直接承担&lt;/h3&gt;
+            &lt;ul class=&quot;kimodo-list&quot;&gt;
+              &lt;li&gt;实时、闭环、对环境变化快速反应的控制&lt;/li&gt;
+              &lt;li&gt;严格动力学可行性与零跌倒保证&lt;/li&gt;
+              &lt;li&gt;场景几何、物体碰撞和抓取力学推理&lt;/li&gt;
+              &lt;li&gt;长时间连续生成；单 prompt 上限约 10 秒&lt;/li&gt;
+              &lt;li&gt;无需后处理就精确命中所有约束&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;kimodo-section&quot;&gt;
+        &lt;h2&gt;最终定位&lt;/h2&gt;
+        &lt;div class=&quot;kimodo-compare&quot;&gt;
+          &lt;div class=&quot;kimodo-compare-side&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;Kimodo 的贡献&lt;/div&gt;
+            &lt;div class=&quot;kimodo-muted&quot;&gt;
+              把高质量 mocap 规模、可直接施加全局约束的 motion representation、两阶段 explicit diffusion 和完整 authoring 工具链组合起来。
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;kimodo-compare-divider&quot;&gt;定位&lt;/div&gt;
+          &lt;div class=&quot;kimodo-compare-side&quot;&gt;
+            &lt;div class=&quot;kimodo-node-title&quot;&gt;它在技术栈中的位置&lt;/div&gt;
+            &lt;div class=&quot;kimodo-muted&quot;&gt;
+              一个强大的 kinematic motion prior / reference generator；它位于自然语言与机器人控制之间，而不是整套 humanoid autonomy system。
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class=&quot;kimodo-source-row text-small&quot;&gt;
+    Sources: “Kimodo: Scaling Controllable Human Motion Generation” (arXiv:2603.15546), current repository at commit 1aece8c, Kimodo Motion Generation Benchmark docs, BONES-SEED / SEED Timeline Annotations.
+  &lt;/footer&gt;
+
+  &lt;script&gt;
+    (function () {
+      var root = document.getElementById(&quot;kimodo-explainer&quot;);
+      if (!root) return;
+
+      var tabButtons = Array.from(root.querySelectorAll(&quot;[data-kimodo-tab]&quot;));
+      var panels = Array.from(root.querySelectorAll(&quot;[data-kimodo-panel]&quot;));
+
+      function selectTab(name) {
+        tabButtons.forEach(function (button) {
+          var selected = button.getAttribute(&quot;data-kimodo-tab&quot;) === name;
+          button.setAttribute(&quot;aria-pressed&quot;, selected ? &quot;true&quot; : &quot;false&quot;);
+          button.classList.toggle(&quot;btn-primary&quot;, selected);
+        });
+        panels.forEach(function (panel) {
+          panel.hidden = panel.getAttribute(&quot;data-kimodo-panel&quot;) !== name;
+        });
+      }
+
+      tabButtons.forEach(function (button) {
+        button.addEventListener(&quot;click&quot;, function () {
+          selectTab(button.getAttribute(&quot;data-kimodo-tab&quot;));
+        });
+      });
+
+      var pipelineDetails = {
+        data: {
+          title: &quot;动作数据：模型能力的上限&quot;,
+          detail: &quot;数据决定动作是否自然、是否覆盖目标行为、是否包含可靠接触。光学 mocap 质量高但昂贵；视频数据规模大但 3D 重建噪声高；teleoperation 直接面向机器人，却慢且容易产生不自然动作。&quot;
+        },
+        representation: {
+          title: &quot;动作表示：决定模型看见什么&quot;,
+          detail: &quot;模型需要同时表达全局移动、身体姿态、速度和接触。纯局部速度表示容易生成连续运动，却不便精确约束稀疏的世界坐标关键帧；全局表示便于控制，但更难学习稳定性。&quot;
+        },
+        generation: {
+          title: &quot;生成先验：从动作分布中采样&quot;,
+          detail: &quot;生成模型学习“哪些动作组合是合理的”。Diffusion 在显式 pose feature 上逐步去噪，计算较慢，但允许在每一步直接覆写受约束的特征，因此非常适合可控 motion authoring。&quot;
+        },
+        control: {
+          title: &quot;可控接口：让动作可被人或规划器指定&quot;,
+          detail: &quot;文本负责语义，关键帧负责姿态，root path 负责空间轨迹，末端约束负责手脚目标。真正实用的系统必须同时处理这些输入及其冲突，而不只是 text-to-motion。&quot;
+        },
+        execution: {
+          title: &quot;物理执行：从参考动作到真实机器人&quot;,
+          detail: &quot;运动学动作仍可能足滑、失衡、越过关节限位或需要不可实现扭矩。Humanoid 需要 retargeting、joint-limit projection 和具备接触/平衡能力的 tracking controller。&quot;
+        }
+      };
+
+      var pipelineButtons = Array.from(root.querySelectorAll(&quot;[data-pipeline-step]&quot;));
+      var pipelineTitle = root.querySelector(&quot;#kimodo-pipeline-title&quot;);
+      var pipelineDetail = root.querySelector(&quot;#kimodo-pipeline-detail&quot;);
+
+      pipelineButtons.forEach(function (button) {
+        button.addEventListener(&quot;click&quot;, function () {
+          var key = button.getAttribute(&quot;data-pipeline-step&quot;);
+          var item = pipelineDetails[key];
+          pipelineButtons.forEach(function (candidate) {
+            candidate.setAttribute(&quot;aria-pressed&quot;, candidate === button ? &quot;true&quot; : &quot;false&quot;);
+          });
+          pipelineTitle.textContent = item.title;
+          pipelineDetail.textContent = item.detail;
+        });
+      });
+
+      var repDetails = {
+        root: {
+          title: &quot;Smooth root：稳定的路径参考&quot;,
+          detail: &quot;对 pelvis 的水平轨迹做强平滑、保留高度。用户画出的直线或曲线约束作用于 smooth root，而 pelvis 可围绕它自然摆动，减少“为了贴线而偷偷走路”的异常动作。&quot;
+        },
+        heading: {
+          title: &quot;Global heading：控制世界坐标朝向&quot;,
+          detail: &quot;用 cos(ψ)、sin(ψ) 避免角度跳变，并通过 first-heading token 指定初始方向。训练时随机旋转首帧朝向，使模型不依赖固定 canonical heading。&quot;
+        },
+        position: {
+          title: &quot;Joint position：支持稀疏世界坐标约束&quot;,
+          detail: &quot;关节 XZ 相对 smooth root 表示，Y 保持全局高度，而且不随 heading 做 canonicalization。这样可以直接约束某一时刻的手、脚或全身位置。&quot;
+        },
+        rotation: {
+          title: &quot;Global 6D rotation：支持稀疏旋转控制&quot;,
+          detail: &quot;全局旋转比 parent-relative rotation 更容易在指定帧直接约束某个末端在世界坐标中的朝向；6D 表示则避免欧拉角和四元数的不连续问题。&quot;
+        },
+        velocity: {
+          title: &quot;Global velocity：显式建模动态连续性&quot;,
+          detail: &quot;全局关节速度为模型提供运动趋势，帮助区分相似姿态下的不同动作状态，也用于接触检测和动作质量相关处理。&quot;
+        },
+        contact: {
+          title: &quot;Foot contact：连接生成质量与后处理&quot;,
+          detail: &quot;模型预测左右 heel/toe 四路 contact。它用于足滑指标和 foot locking；论文训练过 contact constraint，但当前公开 Python API 与 Demo 尚未开放这种输入。&quot;
+        }
+      };
+
+      var repButtons = Array.from(root.querySelectorAll(&quot;[data-rep]&quot;));
+      var repTitle = root.querySelector(&quot;#kimodo-rep-title&quot;);
+      var repDetail = root.querySelector(&quot;#kimodo-rep-detail&quot;);
+
+      repButtons.forEach(function (button) {
+        button.addEventListener(&quot;click&quot;, function () {
+          var key = button.getAttribute(&quot;data-rep&quot;);
+          var item = repDetails[key];
+          repButtons.forEach(function (candidate) {
+            candidate.setAttribute(&quot;aria-pressed&quot;, candidate === button ? &quot;true&quot; : &quot;false&quot;);
+          });
+          repTitle.textContent = item.title;
+          repDetail.textContent = item.detail;
+        });
+      });
+    })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>
