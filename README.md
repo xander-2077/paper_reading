@@ -13,19 +13,18 @@ Interactive paper explainers focused on motion generation, retargeting, and huma
 
 ### Humanoid HOI research map
 
-A searchable research map with 118 papers, deduplicated by arXiv ID:
+A unified, searchable research pool with **154 works**:
 
-- 51 core HOI papers and 67 related-method candidates;
-- 12 priority readings and a 10-paper Majid Khadiv spotlight, both subsets of the full index;
-- contact planning, physically feasible retargeting, whole-body manipulation, and demonstration expansion;
-- cross-paper reading links, publication status, and distinctions between humanoid hardware, quadrupeds, manipulators, and simulation;
-- links back to the Kimodo and Shooting for Contact explainers.
+- 117 core HOI works and 37 related-method references, screened using the same relevance criteria;
+- 20 priority readings and a 10-work Majid Khadiv view, both filters over the same pool;
+- contact representations, whole-body manipulation, physically feasible retargeting, data generation, and perception-driven control;
+- explicit distinctions between humanoid hardware, upper-body and wheeled platforms, manipulators, and simulation.
 
-Checked through **2026-10-08**. Original abstracts or selected paper sections were checked for 22 entries; the other 96 remain preliminary reading candidates. One workshop lead is listed separately and excluded from the paper count. Dates distinguish arXiv submission days from ID-derived months and publication status. Reading recommendations are editorial judgments, not reproduced experimental results.
+The full candidate pool includes 2,778 deduplicated arXiv records, journal alerts, and existing author research notes. Ingestion date does not affect the reading rank. Checked through **2026-10-08 18:00 CST**: original abstracts or selected paper sections were checked for 60 entries; 94 remain preliminary candidates. Relevance labels and verification depth are separate dimensions. Results have not been reproduced.
 
-The page contains only research notes and public paper metadata. It is self-contained HTML with embedded data and does not load external scripts, fonts, or data APIs.
+Deduplication uses arXiv IDs and confirmed work-level relationships: withdrawn HumanoidUMI (2606.27239) is merged into BifrostUMI (2605.03452); the same-titled behavior-system thesis (2606.26425) and short paper (2609.01518) share one record with both sources. A workshop lead is excluded from the count. Dates distinguish arXiv submission days, ID-derived months, and journal publication dates.
 
-Primary sources: [TUM author page](https://www.ce.cit.tum.de/en/aipd/members/majid-khadiv/), arXiv, IEEE, PMLR, and official workshop listings. Each entry links to its public source.
+The page contains only research notes and public paper metadata. It is self-contained HTML and loads no external scripts, fonts, or data APIs. Sources link to arXiv, IEEE, TUM, PMLR, and author/project pages; mailbox contents and identifiers are not published.
 
 ### Kimodo: Scaling Controllable Human Motion Generation
 
